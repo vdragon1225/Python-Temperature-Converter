@@ -6,24 +6,55 @@ def celsiusToFahrenheit(temperature):
 def fahrenheitToCelsius(temperature):
     return (temperature - 32) * 5/9
 
+"""Function to check if the temperature entered
+   by the user if valid"""
+def isValidTemperature(temperature):
+    try: 
+        float(temperature)
+        return True
+    except ValueError:
+        return False
+
 def main():
     print("Welcome to the Temperature Converter!")
 
     # while loop to repeat until user doesn't want to play again
     while True:
-        choice = input("Do you want to enter a temperature in Celsius or Fahrenheit? (C/F) ")
+        choice = input("Do you want to enter a temperature in Celsius or Fahrenheit? (C/F) ").lower()
         
-        if choice == 'c' or choice == 'C': # converts Celsius to Fahrenheit
+        if choice == 'c': # converts Celsius to Fahrenheit
             user_temperature = float(input("Please enter a temperature: ")) # ask user to enter temperature
+
+            # check if the temperature the user entered is valid
+            if not isValidTemperature(user_temperature):
+                print("Invalid input. Please enter a valid temperature.")
+                continue
+            try:
+                user_temperature = float(user_temperature)
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
             new_temperature = celsiusToFahrenheit(user_temperature)
             rounded_temperature = round(new_temperature, 1)
             print(str(user_temperature) + " Celsius is " + str(rounded_temperature) + " Fahrenheit!")
-        elif choice == 'f' or choice == 'F': # converts Fahrenheit to Celsius
+
+        elif choice == 'f': # converts Fahrenheit to Celsius
             user_temperature = float(input("Please enter a temperature: ")) # ask user to enter temperature
+            
+            # check if the temperature the user entered is valid
+            if not isValidTemperature(user_temperature):
+                print("Invalid input. Please enter a valid temperature.")
+                continue
+            try:
+                user_temperature = float(user_temperature)
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
             new_temperature = fahrenheitToCelsius(user_temperature)
             rounded_temperature = round(new_temperature, 1)
             print(str(user_temperature) + " Fahrenheit is " + str(rounded_temperature) + " Celsius!")
-        else: # Prompt user to enter valid chocie
+
+        else: # Prompt user to enter valid choice
             print("Please enter 'C' or 'F': ")
             continue
         
